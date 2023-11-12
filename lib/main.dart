@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
 
       home: MainScreen(),
     );
@@ -29,16 +29,53 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("example SimpleDialog"),
+        title: const Text("favorite Color"),
         titleTextStyle: const TextStyle(color:Colors.red),
         backgroundColor: Colors.orangeAccent,
         centerTitle: true,
       ),
       body: OutlinedButton.icon(onPressed: (){
-
+          showDialog(context: context,
+              barrierColor: Colors.red.shade50,
+              barrierDismissible: false,
+              builder: (context){
+               return  SimpleDialog(
+                 title: const Text("favorite Color"),
+                 titleTextStyle:const TextStyle(color: Colors.white),
+                 titlePadding:const EdgeInsets.all(26),
+                 elevation: 14,
+                 backgroundColor: Colors.lightBlueAccent,
+                 shadowColor: Colors.orangeAccent,
+                 contentPadding:const EdgeInsets.all(24),
+                 alignment: Alignment.topCenter,
+                 shape: RoundedRectangleBorder(
+                   borderRadius: BorderRadius.circular(29)
+                 ),
+                 children: [
+                   SimpleDialogOption(
+                     onPressed: ()
+                     {
+                       print("Red");
+                       Navigator.of(context).pop();
+                     },
+                     child: const Text("Red",style: TextStyle(color:Colors.white,
+                         backgroundColor: Colors.red),),
+                   ),
+                   SimpleDialogOption(
+                     onPressed: ()
+                     {
+                       print("Green");
+                       Navigator.of(context).pop();
+                     },
+                     child: const Text("Green",style: TextStyle(color:Colors.white,
+                     backgroundColor: Colors.green),),
+                   )
+                 ],
+               );
+              });
       },
           icon:const Icon(Icons.update),
-          label: const Text("confirm update")),
+          label: const Text("favorite color")),
     );
   }
 }
